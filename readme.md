@@ -31,6 +31,7 @@ $ docker exec -ti [NAME] bash
 
 ## Running commands: 
 
+`docker exec {container_name} $command`
 
 ## More
 If you want to use Redis - uncomment the lines in docker-compose.yml
