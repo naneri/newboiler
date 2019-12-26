@@ -1,0 +1,49 @@
+version: '2'
+services:
+    
+    # nginx container
+    web:
+        image: nginx:1.17
+        restart: unless-stopped
+        volumes:
+            - ./..:/var/www
+            - ./nginx/conf.d/:/etc/nginx/conf.d/
+        ports:
+            - "${DOCKER_WEB_PORT}:80"
+        links:
+            - app
+
+    # app with php container
+    app:
+        restart: unless-stopped
+        build:
+            context: ./
+            dockerfile: app.docker
+        volumes:
+            - ./..:/var/www
+        # uncomment whichever service you need and then uncomment it's links
+        links:
+            - database   
+            # - cache
+        environment:
+            - "DB_PORT=3306"
+            - "DB_HOST=database"
+        #     - "REDIS_PORT=6379"
+        #     - "REDIS_HOST=cache"
+
+    # database container      
+    database:
+        image: mysql:5.7
+        restart: unless-stopped
+        environment:
+            - "MYSQL_ROOT_PASSWORD="
+            - "MYSQL_DATABASE=laravel"
+            - "MYSQL_ALLOW_EMPTY_PASSWORD=yes"
+        ports:
+            - "${DOCKER_DB_PORT}:3306"
+
+    # cache container
+    # cache:
+    #     image: redis:3.0
+    #     ports:
+    #         - "${DOCKER_CACHE_PORT}:6379"
