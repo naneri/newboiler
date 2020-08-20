@@ -18,7 +18,7 @@ services:
         restart: unless-stopped
         build:
             context: ./
-            dockerfile: app.docker
+            dockerfile: php/app.docker
         volumes:
             - ./..:/var/www
         # uncomment whichever service you need and then uncomment it's links
