@@ -14,7 +14,7 @@ services:
             - app
 
     # app with php container
-    app:
+    php:
         restart: unless-stopped
         build:
             context: ./
@@ -39,8 +39,23 @@ services:
             - "MYSQL_ROOT_PASSWORD="
             - "MYSQL_DATABASE=laravel"
             - "MYSQL_ALLOW_EMPTY_PASSWORD=yes"
+        volumes:
+            - ./db/dbdata:/var/lib/mysql
         ports:
             - "${DOCKER_DB_PORT}:3306"
+
+    # to install composer dependencies. Will shut down after installing
+    composer:
+        image: composer:latest
+        volumes:
+            - ./..:/var/www/html
+    
+    # to install npm dependencies and compile frontend. Will shut down after
+    npm:
+    image: node:latest
+    volumes:
+        - ./..:/var/www/html
+    entrypoint: ['npm', '--no-bin-links']
 
     # cache container
     # cache:
