@@ -11,7 +11,7 @@ services:
         ports:
             - "${DOCKER_WEB_PORT}:80"
         links:
-            - app
+            - php
 
     # app with php container
     php:
@@ -47,18 +47,22 @@ services:
     # to install composer dependencies. Will shut down after installing
     composer:
         image: composer:latest
+        working_dir: /var/www/
         volumes:
-            - ./..:/var/www/html
+            - ./..:/var/www/
     
     # to install npm dependencies and compile frontend. Will shut down after
     npm:
-    image: node:latest
-    volumes:
-        - ./..:/var/www/html
-    entrypoint: ['npm', '--no-bin-links']
+        image: node:latest
+        working_dir: /var/www/
+        volumes:
+            - ./..:/var/www/
+        entrypoint: ['npm', '--no-bin-links']
 
     # cache container
     # cache:
     #     image: redis:3.0
     #     ports:
     #         - "${DOCKER_CACHE_PORT}:6379"
+
+    
