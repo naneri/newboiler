@@ -31,10 +31,10 @@ $ docker exec -ti [NAME] bash
 
 ## Running commands: 
 
-`docker exec {container_name} $command`. 
-`docker-compose run --rm composer install`. 
-`docker-compose run --rm npm install`. 
-`docker-compose run --rm npm run dev`. 
+`docker exec {container_name} $command`  
+`docker-compose run --rm composer install`  
+`docker-compose run --rm npm install`  
+`docker-compose run --rm npm run dev`  
 
 ## More
 If you want to use Redis - uncomment the lines in docker-compose.yml
