@@ -37,5 +37,6 @@ $ docker exec -ti [NAME] bash
 `docker-compose run --rm npm run dev`  
 
 ## More
-If you want to use Redis - uncomment the lines in docker-compose.yml
+If you want to use Redis - uncomment the lines in docker-compose.yml  
+If you use newboiler on many projects - rename the `deploy` folder to a unique name, because containers will use the folder name as prefix and might conflict
 
