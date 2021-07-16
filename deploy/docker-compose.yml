@@ -43,13 +43,6 @@ services:
             - ./db/dbdata:/var/lib/mysql
         ports:
             - "${DOCKER_DB_PORT}:3306"
-
-    # to install composer dependencies. Will shut down after installing
-    composer:
-        image: composer:latest
-        working_dir: /var/www/
-        volumes:
-            - ./..:/var/www/
     
     # to install npm dependencies and compile frontend. Will shut down after
     npm:
